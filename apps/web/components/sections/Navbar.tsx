@@ -74,10 +74,10 @@ export function Navbar({
             </div>
           </div>
           <div>
-            <span className="font-heading font-bold text-sm tracking-wide text-white">
-              Deepjoy Bhowmik
+            <span className="font-heading font-bold text-xs sm:text-sm tracking-wide text-white">
+              Deepjoy <span className="hidden sm:inline">Bhowmik</span>
             </span>
-            <span className="block text-[10px] font-mono text-slate-400 tracking-tight">
+            <span className="block text-[9px] sm:text-[10px] font-mono text-slate-400 tracking-tight hidden sm:block">
               Agartala, Tripura
             </span>
           </div>
@@ -176,7 +176,7 @@ export function Navbar({
           <button
             onClick={handleSoundToggle}
             aria-label="Toggle UI Sounds"
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-muted hover:text-foreground transition-all"
+            className="hidden sm:flex p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-muted hover:text-foreground transition-all"
             title={isMuted ? "Unmute Sounds" : "Mute Sounds"}
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-cyan-400" />}
@@ -186,7 +186,7 @@ export function Navbar({
           <button
             onClick={handleThemeToggle}
             aria-label="Toggle Theme"
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-muted hover:text-foreground transition-all"
+            className="hidden sm:flex p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-muted hover:text-foreground transition-all"
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4 text-violet-400" />}

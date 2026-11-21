@@ -89,7 +89,7 @@ export function Hero({ currentLocale }: { currentLocale: Locale }) {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-center max-w-4xl mb-6"
         >
-          <h1 className="font-heading font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-slate-900 leading-[1.05]">
+          <h1 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-slate-900 leading-[1.08]">
             I&apos;m{" "}
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-500 to-orange-500">
               Deepjoy

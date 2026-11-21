@@ -10,4 +10,7 @@ execSync(`"${chrome}" --headless=new --virtual-time-budget=6000 --window-size=14
 console.log('Capturing Mobile View (390x844)...');
 execSync(`"${chrome}" --headless=new --virtual-time-budget=6000 --window-size=390,844 "--screenshot=${path.join(artifactDir, 'jayesh-patil-mobile-live.png')}" https://deepjoyinfo.vercel.app`);
 
+console.log('Capturing Services Section (Desktop scrolled)...');
+execSync(`"${chrome}" --headless=new --virtual-time-budget=6000 --window-size=1440,960 "--screenshot=${path.join(artifactDir, 'jayesh-patil-services-live.png')}" https://deepjoyinfo.vercel.app/#services`);
+
 console.log('Done capturing live theme screenshots!');
