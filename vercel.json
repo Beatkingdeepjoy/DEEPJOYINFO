@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "npm install --legacy-peer-deps",
-  "buildCommand": "npm run --workspace=apps/web build",
+  "buildCommand": "node scripts/patch-react19.js && npm run --workspace=apps/web build",
   "outputDirectory": "apps/web/.next",
   "cleanUrls": true,
   "headers": [
