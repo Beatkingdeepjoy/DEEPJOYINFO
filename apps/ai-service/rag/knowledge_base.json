@@ -1,0 +1,75 @@
+{
+  "developer": {
+    "name": "Deepjoy Bhowmik",
+    "location": "Agartala, Tripura, India",
+    "roles": [
+      "Full-Stack Developer",
+      "Tech YouTuber (Student Vlogger)",
+      "Google Student Ambassador (Gemini AI)"
+    ],
+    "brand_line": "Coding is my hobby, vlogging is my passion.",
+    "tagline": "I build the web by night and film the journey by day.",
+    "education": "B.Tech in Computer Science and Engineering, ICFAI University Tripura (2023 - Present)",
+    "emails": {
+      "developer": "deepjoydeveloper@gmail.com",
+      "sponsorship_and_collab": "deepjoyallcollab@gmail.com"
+    },
+    "links": {
+      "github": "https://github.com/Beatkingdeepjoy",
+      "linkedin": "https://www.linkedin.com/in/deepjoy-bhowmik-692451320/",
+      "youtube": "https://www.youtube.com/@deepjoybhowmikofficial",
+      "leetcode": "https://leetcode.com/u/beatking_deepjoy/"
+    },
+    "privacy_policy": {
+      "phone_number": "WITHHELD. Do NOT disclose publicly."
+    }
+  },
+  "experiences": [
+    {
+      "role": "Google Student Ambassador (Gemini AI)",
+      "organization": "Ping Digital Broadcast (On-Campus Initiative)",
+      "location": "Agartala, Tripura",
+      "period": "March 2026 to Present",
+      "achievements": [
+        "Selected as a student leader to drive adoption and awareness of Google Gemini AI tools on campus.",
+        "Ran the 'Career Glow-up Night' product-pitch workshop; onboarded 30+ active student participants.",
+        "Led workshops on generative AI, prompt engineering, and multi-agent system concepts."
+      ]
+    },
+    {
+      "role": "Full Stack Developer Intern",
+      "organization": "NIELIT Agartala",
+      "location": "Agartala, Tripura",
+      "period": "Dec 2024 to Mar 2025",
+      "achievements": [
+        "Built a Tripura government website with a secure login and registration system.",
+        "Built responsive pages with HTML, CSS, JavaScript.",
+        "Implemented a PHP backend for authentication and data storage with database integration."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "SHUDH DESI",
+      "url": "https://shudhdesi.store/",
+      "role": "Founder and Lead Developer",
+      "description": "E-commerce platform for traditional Northeast Indian snacks and delicacies.",
+      "progress": "80% complete (finishing secure payment gateway and inventory management, Launching Soon)"
+    },
+    {
+      "name": "AroWeather",
+      "url": "https://aroweather.vercel.app/",
+      "description": "Real-time weather app using APIs, interactive UI, fast and responsive."
+    },
+    {
+      "name": "Code Charcha",
+      "url": "https://code-charcha.vercel.app/",
+      "description": "Modern UI/UX for a coding discussion platform, responsive and interactive."
+    },
+    {
+      "name": "Portfolio v1",
+      "url": "https://myportfolio-six-wheat.vercel.app/",
+      "description": "Vanilla HTML/CSS/JS portfolio, predecessor to the 3D reactive platform."
+    }
+  ]
+}
