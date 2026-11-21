@@ -47,6 +47,7 @@ export function Navbar({
 
   const navLinks = [
     { href: "#about", label: t.about },
+    { href: "#services", label: "Services" },
     { href: "#skills", label: t.skills },
     { href: "#projects", label: t.projects },
     { href: "#experience", label: t.experience },
@@ -59,26 +60,26 @@ export function Navbar({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-night-950/80 backdrop-blur-md border-b border-white/10 py-3 shadow-glass"
-          : "bg-transparent py-5"
+          ? "bg-night-950/85 backdrop-blur-xl border-b border-white/10 py-3 shadow-glass"
+          : "bg-transparent py-4 sm:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Monogram */}
         <Link
           href="/"
-          className="flex items-center space-x-2 group"
+          className="flex items-center space-x-2.5 group"
           onClick={() => soundFx.playClick()}
           onMouseEnter={() => soundFx.playHover()}
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-accent-violet via-accent-cyan to-accent-magenta p-[1.5px] shadow-glow">
-            <div className="w-full h-full bg-night-950 rounded-[10px] flex items-center justify-center">
-              <span className="font-heading font-extrabold text-lg text-white group-hover:text-cyan-300 transition-colors">
+          <div className="w-10 h-10 rounded-2xl coral-gradient p-[1.5px] shadow-sm">
+            <div className="w-full h-full bg-night-950 rounded-[14px] flex items-center justify-center">
+              <span className="font-heading font-extrabold text-base text-white group-hover:text-orange-300 transition-colors">
                 DB
               </span>
             </div>
           </div>
-          <div className="hidden sm:block">
+          <div>
             <span className="font-heading font-bold text-sm tracking-wide text-foreground">
               Deepjoy Bhowmik
             </span>
@@ -89,14 +90,22 @@ export function Navbar({
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-1 glass-panel px-4 py-1.5 rounded-full">
+        <nav className="hidden lg:flex items-center space-x-1 glass-card-pro px-3 py-1.5 rounded-full">
+          <a
+            href="#hero"
+            onClick={() => soundFx.playClick()}
+            onMouseEnter={() => soundFx.playHover()}
+            className="px-4 py-1.5 text-xs font-semibold text-white coral-gradient rounded-full shadow-sm transition-all"
+          >
+            Home
+          </a>
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => soundFx.playClick()}
               onMouseEnter={() => soundFx.playHover()}
-              className="px-3.5 py-1.5 text-xs font-medium text-muted hover:text-foreground hover:bg-white/5 rounded-full transition-all"
+              className="px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
             >
               {link.label}
             </a>
@@ -105,7 +114,7 @@ export function Navbar({
             href="/resume"
             onClick={() => soundFx.playClick()}
             onMouseEnter={() => soundFx.playHover()}
-            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-cyan-300 bg-cyan-950/40 hover:bg-cyan-900/40 border border-cyan-500/30 rounded-full transition-all"
+            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-orange-300 bg-orange-950/40 hover:bg-orange-900/40 border border-orange-500/30 rounded-full transition-all"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>CV</span>
@@ -114,6 +123,15 @@ export function Navbar({
 
         {/* Right Tools Controls */}
         <div className="flex items-center space-x-2">
+          {/* Hire Me CTA Button */}
+          <a
+            href="#contact"
+            onClick={() => soundFx.playClick()}
+            onMouseEnter={() => soundFx.playHover()}
+            className="hidden md:inline-flex items-center space-x-1.5 px-4 py-2 rounded-full coral-gradient text-white font-semibold text-xs tracking-wide shadow-sm hover:scale-105 active:scale-95 transition-all"
+          >
+            <span>Hire Me</span>
+          </a>
           {/* Language Selector Dropdown */}
           <div className="relative group">
             <button

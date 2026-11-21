@@ -57,7 +57,7 @@ export function YouTubeDashboard() {
 
         {/* Channel Stats Dashboard */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-          <div className="glass-panel p-6 rounded-3xl border border-rose-500/20 flex items-center space-x-4">
+          <div className="glass-card-pro p-6 rounded-3xl flex items-center space-x-4">
             <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
               <Users className="w-6 h-6" />
             </div>
@@ -71,7 +71,7 @@ export function YouTubeDashboard() {
             </div>
           </div>
 
-          <div className="glass-panel p-6 rounded-3xl border border-rose-500/20 flex items-center space-x-4">
+          <div className="glass-card-pro p-6 rounded-3xl flex items-center space-x-4">
             <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
               <Film className="w-6 h-6" />
             </div>
@@ -85,7 +85,7 @@ export function YouTubeDashboard() {
             </div>
           </div>
 
-          <div className="glass-panel p-6 rounded-3xl border border-rose-500/20 flex items-center space-x-4">
+          <div className="glass-card-pro p-6 rounded-3xl flex items-center space-x-4">
             <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
               <Eye className="w-6 h-6" />
             </div>
@@ -104,7 +104,7 @@ export function YouTubeDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
           {/* Main Cinema Viewport (8 cols) */}
           <div className="lg:col-span-8 space-y-4">
-            <div className="relative aspect-video rounded-3xl overflow-hidden glass-panel border border-white/10 shadow-2xl bg-night-950 flex items-center justify-center group">
+            <div className="relative aspect-video rounded-3xl overflow-hidden glass-card-pro shadow-2xl bg-night-950 flex items-center justify-center group">
               {isPlaying ? (
                 <iframe
                   src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1`}
@@ -205,7 +205,7 @@ export function YouTubeDashboard() {
         </div>
 
         {/* Day in My Life Mini Timeline */}
-        <div className="glass-panel p-8 rounded-3xl border border-white/10">
+        <div className="glass-card-pro p-8 rounded-3xl">
           <div className="flex items-center space-x-2 text-rose-400 font-mono text-xs uppercase tracking-wider mb-2">
             <Clock className="w-4 h-4" />
             <span>Day In The Life // Tripura Engineering Rhythm</span>

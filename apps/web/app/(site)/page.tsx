@@ -10,6 +10,7 @@ const Preloader = dynamic(
 );
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { ServicesSection } from "@/components/sections/ServicesSection";
 import { About } from "@/components/sections/About";
 import { SkillsGalaxy } from "@/components/sections/SkillsGalaxy";
 import { ProjectsBento } from "@/components/sections/ProjectsBento";
@@ -42,7 +43,10 @@ export default function HomePage() {
         {/* 01. Hero Universe */}
         <Hero currentLocale={locale} />
 
-        {/* 02. About & Ambassador Highlight */}
+        {/* 02. What I Deliver & Services (Figma/Dribbble Bento) */}
+        <ServicesSection />
+
+        {/* 03. About & Ambassador Highlight */}
         <About currentLocale={locale} />
 
         {/* 03. Skills Galaxy & Learning Orbit */}

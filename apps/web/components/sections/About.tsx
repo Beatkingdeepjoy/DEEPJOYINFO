@@ -58,13 +58,13 @@ export function About({ currentLocale }: { currentLocale: Locale }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
           {/* Left Column: Portrait & Campus Life Card (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="relative group rounded-3xl p-1 bg-gradient-to-b from-accent-violet/40 via-white/5 to-accent-cyan/20 shadow-glow">
+            <div className="relative group rounded-3xl p-1 bg-gradient-to-b from-orange-500/30 via-white/5 to-amber-500/20 shadow-glow">
               <div className="relative rounded-[22px] overflow-hidden bg-night-900 aspect-[4/5] flex flex-col justify-end p-6">
                 {/* Stylized Portrait Visual Background */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 bg-cover bg-top transition-transform duration-700 group-hover:scale-105"
                   style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1534972195531-a756b1126f24?w=800&auto=format&fit=crop&q=80')`,
+                    backgroundImage: `url('/deepjoy-avatar.png')`,
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-night-950 via-night-950/60 to-transparent" />
@@ -85,8 +85,8 @@ export function About({ currentLocale }: { currentLocale: Locale }) {
             </div>
 
             {/* Quick Education Card */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
-              <div className="flex items-center space-x-2 text-accent-cyan font-mono text-xs font-semibold uppercase">
+            <div className="glass-card-pro p-6 rounded-3xl space-y-2">
+              <div className="flex items-center space-x-2 text-orange-400 font-mono text-xs font-semibold uppercase">
                 <Award className="w-4 h-4" />
                 <span>Formal Education</span>
               </div>
@@ -102,14 +102,14 @@ export function About({ currentLocale }: { currentLocale: Locale }) {
           {/* Right Column: Narrative & Google Gemini Highlight (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             {/* Story Card */}
-            <div className="glass-panel p-8 rounded-3xl border border-white/10 space-y-4">
+            <div className="glass-card-pro p-8 rounded-3xl space-y-4">
               <h3 className="font-heading font-bold text-2xl text-white">
                 Building By Night, Vlogging By Day
               </h3>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                 I am an undergraduate Computer Science student based in{" "}
-                <span className="text-cyan-300 font-semibold">Agartala, Tripura</span>. When I&apos;m not architecting full-stack web applications like{" "}
-                <span className="text-accent-magenta font-semibold">SHUDH DESI</span> or studying data structures at ICFAI University, I pick up my camera to capture authentic B.Tech hostel life, coding late into the morning, and the untold stories of engineering in Northeast India.
+                <span className="text-orange-400 font-semibold">Agartala, Tripura</span>. When I&apos;m not architecting full-stack web applications like{" "}
+                <span className="text-amber-400 font-semibold">SHUDH DESI</span> or studying data structures at ICFAI University, I pick up my camera to capture authentic B.Tech hostel life, coding late into the morning, and the untold stories of engineering in Northeast India.
               </p>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                 My mission is twofold: write robust, production-grade code that solves tangible regional problems, and inspire other students across India that you don&apos;t need a metro city to build world-class digital platforms.
@@ -117,7 +117,7 @@ export function About({ currentLocale }: { currentLocale: Locale }) {
             </div>
 
             {/* Google Gemini Ambassador Card */}
-            <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-r from-accent-violet/20 via-night-900 to-accent-cyan/15 border border-accent-cyan/30 shadow-glow-cyan">
+            <div className="relative overflow-hidden rounded-3xl p-8 bg-gradient-to-r from-orange-500/15 via-night-900 to-amber-500/15 border border-orange-500/30 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-accent-violet to-accent-cyan p-[1.5px]">
@@ -165,13 +165,13 @@ export function About({ currentLocale }: { currentLocale: Locale }) {
             <div
               key={idx}
               onMouseEnter={() => soundFx.playHover()}
-              className="glass-panel glass-panel-hover p-6 rounded-2xl border border-white/10 flex flex-col justify-between"
+              className="glass-card-pro p-6 rounded-3xl flex flex-col justify-between"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                <span className="p-2.5 rounded-2xl bg-white/5 border border-white/10">
                   {card.icon}
                 </span>
-                <span className="font-heading font-extrabold text-3xl sm:text-4xl gradient-text">
+                <span className="font-heading font-extrabold text-3xl sm:text-4xl coral-gradient-text">
                   {card.value}
                 </span>
               </div>

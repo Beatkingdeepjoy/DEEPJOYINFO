@@ -20,6 +20,9 @@ export default {
           cyan: "#22D3EE",
           magenta: "#E879F9",
           emerald: "#10B981",
+          orange: "#FF6B2B",
+          coral: "#F97316",
+          amber: "#F59E0B",
         },
         night: {
           950: "#05050A",

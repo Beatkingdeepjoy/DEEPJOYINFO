@@ -32,15 +32,15 @@ export function ExperienceTimeline() {
               className="relative group"
             >
               {/* Timeline Glowing Node */}
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-night-950 border-2 border-accent-cyan flex items-center justify-center group-hover:scale-125 transition-transform shadow-glow-cyan">
-                <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
+              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-night-950 border-2 border-orange-400 flex items-center justify-center group-hover:scale-125 transition-transform shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
               </div>
 
               {/* Timeline Card */}
-              <div className="glass-panel glass-panel-hover p-6 sm:p-8 rounded-3xl border border-white/10 space-y-4">
+              <div className="glass-card-pro p-6 sm:p-8 rounded-3xl space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-accent-violet/20 border border-accent-violet/40 text-accent-cyan font-mono text-xs mb-1">
+                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 font-mono text-xs mb-1">
                       {exp.badge}
                     </span>
                     <h3 className="font-heading font-bold text-2xl text-white">
@@ -53,11 +53,11 @@ export function ExperienceTimeline() {
 
                   <div className="flex flex-col sm:items-end text-xs font-mono text-muted space-y-1">
                     <div className="flex items-center space-x-1">
-                      <Calendar className="w-3.5 h-3.5 text-accent-magenta" />
+                      <Calendar className="w-3.5 h-3.5 text-orange-400" />
                       <span>{exp.period}</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                      <MapPin className="w-3.5 h-3.5 text-slate-400" />
                       <span>{exp.location}</span>
                     </div>
                   </div>

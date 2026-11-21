@@ -46,9 +46,9 @@ export function SkillsGalaxy() {
                 soundFx.playClick();
               }}
               onMouseEnter={() => soundFx.playHover()}
-              className={`px-4 py-2 rounded-full text-xs font-mono transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-accent-violet text-white shadow-glow border border-accent-violet"
+                  ? "coral-gradient text-white font-bold shadow-sm"
                   : "bg-white/5 text-muted hover:text-white hover:bg-white/10 border border-white/5"
               }`}
             >
@@ -67,7 +67,7 @@ export function SkillsGalaxy() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="glass-panel p-6 rounded-3xl border border-white/10 flex flex-col justify-between"
+              className="glass-card-pro p-7 rounded-3xl flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -152,7 +152,7 @@ export function SkillsGalaxy() {
             {CERTIFICATIONS.map((cert) => (
               <div
                 key={cert.title}
-                className="glass-panel p-5 rounded-2xl border border-white/10 flex flex-col justify-between"
+                className="glass-card-pro p-6 rounded-3xl flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
