@@ -1,38 +1,28 @@
 # Production Deployment Guide: Vercel & Render
 
 **Target Repository**: `https://github.com/Beatkingdeepjoy/DEEPJOYINFO.git`  
-**Platforms**: **Vercel** (Frontend Next.js 15) & **Render** (FastAPI AI Service / Full-Stack)
+**Live Production URL (Vercel)**: [https://deepjoyinfo.vercel.app](https://deepjoyinfo.vercel.app)  
+**Alternative Vercel Domains**:
+- `https://deepjoyinfo-beatkingdeepjoys-projects.vercel.app`
+- `https://deepjoyinfo-git-main-beatkingdeepjoys-projects.vercel.app`
 
 ---
 
-## 🚀 Part 1: Deploying to Vercel (Recommended for Next.js 15)
+## 🚀 Part 1: Vercel Deployment (Completed & Live)
 
-Vercel provides edge caching, automatic image optimization, and global CDN delivery for your 3D platform.
+Your Next.js 15 3D Platform is **fully deployed and operational** on Vercel:
+- **Deployment ID**: `dpl_FhYF4UgWVus7zCZ5LXmr6595Js1N` (State: `READY`)
+- **Next.js Version**: `15.5.29` (Secured against CVE-2025-66478)
+- **Routes Pre-rendered**: 19/19 (100% SSG & dynamic endpoints)
+- **Continuous Deployment**: Connected to `Beatkingdeepjoy/DEEPJOYINFO` (`main` branch) — any new push to GitHub will automatically build and deploy!
 
-### Step 1: Import Project on Vercel
-1. Go to [https://vercel.com/new](https://vercel.com/new) and log in with your GitHub account (`Beatkingdeepjoy`).
-2. Find and select the repository **`DEEPJOYINFO`**, then click **Import**.
-
-### Step 2: Configure Project Settings
-- **Framework Preset**: `Next.js`
-- **Root Directory**: Leave as `./` (or select `apps/web` if you prefer single-app scope).
-- The included `vercel.json` automatically configures:
-  - **Build Command**: `npm run --workspace=apps/web build`
-  - **Output Directory**: `apps/web/.next`
-  - **Install Command**: `npm install --legacy-peer-deps`
-
-### Step 3: Add Environment Variables on Vercel
-Add the following keys under **Settings > Environment Variables**:
-| Variable Name | Example Value | Description |
-|---|---|---|
-| `NEXT_PUBLIC_APP_URL` | `https://your-vercel-domain.vercel.app` | Production URL |
-| `NEXT_PUBLIC_AI_URL` | `https://deepjoy-ai-service.onrender.com` | URL of your Render AI service |
-| `YOUTUBE_CHANNEL_ID` | `UCztCtzW52UO_iOONZZzQnQw` | Your verified YouTube Channel ID |
-| `YOUTUBE_API_KEY` | `[Optional Google API Key]` | Live YouTube sync (fallback active if blank) |
-| `NEXTAUTH_SECRET` | `[Generate 32-char random string]` | Admin authentication secret |
-
-### Step 4: Deploy
-Click **Deploy**. Vercel will build the 19 static and dynamic routes in ~60 seconds.
+### Optional Environment Variables on Vercel:
+If you want live real-time sync with YouTube API instead of the graceful offline fallback:
+| Variable Name | Description |
+|---|---|
+| `YOUTUBE_API_KEY` | Your Google Cloud YouTube Data API v3 key |
+| `YOUTUBE_CHANNEL_ID` | `UCztCtzW52UO_iOONZZzQnQw` |
+| `NEXT_PUBLIC_AI_URL` | `https://deepjoy-ai-service.onrender.com` (when Render AI is deployed) |
 
 ---
 
