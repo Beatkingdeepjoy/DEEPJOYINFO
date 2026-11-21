@@ -60,7 +60,10 @@ const SERVICES: ServiceItem[] = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 sm:py-32 overflow-hidden bg-night-950/80">
+    <section
+      id="services"
+      className="relative rounded-t-[44px] sm:rounded-t-[60px] bg-[#0c0d14] text-white pt-24 pb-32 -mt-10 sm:-mt-14 z-20 shadow-[0_-25px_60px_rgba(0,0,0,0.35)] overflow-hidden"
+    >
       {/* Background Ambient Glows */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />

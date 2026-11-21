@@ -57,14 +57,8 @@ export function Navbar({
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-night-950/85 backdrop-blur-xl border-b border-white/10 py-3 shadow-glass"
-          : "bg-transparent py-4 sm:py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
+      <div className="pointer-events-auto flex items-center justify-between w-full max-w-6xl px-4 sm:px-6 py-2.5 rounded-full bg-slate-950/85 backdrop-blur-2xl border border-white/15 shadow-2xl transition-all">
         {/* Brand Monogram */}
         <Link
           href="/"
@@ -73,17 +67,17 @@ export function Navbar({
           onMouseEnter={() => soundFx.playHover()}
         >
           <div className="w-10 h-10 rounded-2xl coral-gradient p-[1.5px] shadow-sm">
-            <div className="w-full h-full bg-night-950 rounded-[14px] flex items-center justify-center">
+            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
               <span className="font-heading font-extrabold text-base text-white group-hover:text-orange-300 transition-colors">
                 DB
               </span>
             </div>
           </div>
           <div>
-            <span className="font-heading font-bold text-sm tracking-wide text-foreground">
+            <span className="font-heading font-bold text-sm tracking-wide text-white">
               Deepjoy Bhowmik
             </span>
-            <span className="block text-[10px] font-mono text-muted tracking-tight">
+            <span className="block text-[10px] font-mono text-slate-400 tracking-tight">
               Agartala, Tripura
             </span>
           </div>
@@ -226,8 +220,8 @@ export function Navbar({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-4 pt-4 pb-6 bg-night-950/95 border-b border-white/10 backdrop-blur-xl animate-in slide-in-from-top-4">
-          <div className="flex flex-col space-y-2">
+        <div className="pointer-events-auto absolute top-full left-4 right-4 mt-2 px-4 py-5 bg-slate-950/95 border border-white/15 rounded-3xl shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-4 lg:hidden">
+          <div className="flex flex-col space-y-1.5">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -236,7 +230,7 @@ export function Navbar({
                   setMobileMenuOpen(false);
                   soundFx.playClick();
                 }}
-                className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all"
+                className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all"
               >
                 {link.label}
               </a>
@@ -247,7 +241,7 @@ export function Navbar({
                 setMobileMenuOpen(false);
                 soundFx.playClick();
               }}
-              className="px-4 py-2.5 rounded-xl text-sm font-semibold text-cyan-300 bg-cyan-950/30 border border-cyan-500/20"
+              className="px-4 py-2.5 rounded-xl text-sm font-semibold text-orange-400 bg-orange-950/30 border border-orange-500/20"
             >
               Curriculum Vitae (CV)
             </Link>
