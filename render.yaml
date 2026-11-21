@@ -1,0 +1,36 @@
+services:
+  # 1. Grounded AI RAG Service (FastAPI) on Render
+  - type: web
+    name: deepjoy-ai-service
+    runtime: python
+    rootDir: apps/ai-service
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: PORT
+        value: 8000
+
+  # 2. Next.js 15 3D Platform (Full-Stack Frontend) on Render
+  - type: web
+    name: deepjoy-platform-web
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/youtube
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.20.0
+      - key: NEXT_PUBLIC_APP_URL
+        generateValue: false
+        sync: false
