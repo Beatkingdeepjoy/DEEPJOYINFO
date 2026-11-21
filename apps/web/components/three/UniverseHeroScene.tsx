@@ -1,229 +1,279 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Text } from "@react-three/drei";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { FireflyField } from "./FireflyField";
 import { LightweightUniverseFallback } from "./LightweightUniverseFallback";
 
-// Tech stack items in the orbit
 const ORBIT_ITEMS = [
-  { name: "Python", color: "#3B82F6", pos: [4, 1, 0] },
-  { name: "JavaScript", color: "#F59E0B", pos: [2.8, 2.8, 0] },
-  { name: "Gemini AI", color: "#22D3EE", pos: [0, 4, 0] },
-  { name: "Next.js", color: "#FFFFFF", pos: [-2.8, 2.8, 0] },
-  { name: "React", color: "#61DAFB", pos: [-4, 1, 0] },
-  { name: "MongoDB", color: "#10B981", pos: [-2.8, -2.8, 0] },
-  { name: "PHP", color: "#8892BF", pos: [0, -4, 0] },
-  { name: "HTML/CSS", color: "#E879F9", pos: [2.8, -2.8, 0] },
+  { name: "Python", color: "#3B82F6" },
+  { name: "JavaScript", color: "#F59E0B" },
+  { name: "Gemini AI", color: "#22D3EE" },
+  { name: "Next.js", color: "#FFFFFF" },
+  { name: "React", color: "#61DAFB" },
+  { name: "MongoDB", color: "#10B981" },
+  { name: "PHP", color: "#8892BF" },
+  { name: "HTML/CSS", color: "#E879F9" },
 ];
 
-// Floating code glyphs
 const CODE_GLYPHS = [
-  { char: "</>", pos: [-5, 3, -4] as [number, number, number], rot: [0.1, 0.2, 0] },
-  { char: "{ }", pos: [5.5, 2.5, -3] as [number, number, number], rot: [-0.2, 0.1, 0.3] },
-  { char: "=>", pos: [-4.5, -2, -2] as [number, number, number], rot: [0.1, -0.3, 0.2] },
-  { char: "async", pos: [4.8, -3, -4] as [number, number, number], rot: [-0.1, 0.2, -0.1] },
-  { char: "def", pos: [0, 4.5, -5] as [number, number, number], rot: [0, 0, 0.1] },
+  { char: "</>", pos: [-5.5, 3.2, -3] as const, color: "#22D3EE" },
+  { char: "{ }", pos: [5.8, 2.6, -2.5] as const, color: "#7C3AED" },
+  { char: "=>", pos: [-4.8, -2.2, -2] as const, color: "#E879F9" },
+  { char: "async", pos: [5.2, -3.2, -3] as const, color: "#22D3EE" },
+  { char: "def", pos: [0.2, 4.2, -4] as const, color: "#3B82F6" },
 ];
 
-function OrbitingRing() {
-  const ringGroupRef = useRef<THREE.Group>(null);
-
-  useFrame(({ clock }) => {
-    if (!ringGroupRef.current) return;
-    const t = clock.getElapsedTime() * 0.15;
-    ringGroupRef.current.rotation.z = t;
-    ringGroupRef.current.rotation.x = Math.sin(t * 0.5) * 0.2 + 0.3;
-  });
-
-  return (
-    <group ref={ringGroupRef}>
-      {/* Central ring wireframe */}
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[4.2, 0.02, 16, 100]} />
-        <meshBasicMaterial color="#7C3AED" transparent opacity={0.3} />
-      </mesh>
-
-      {ORBIT_ITEMS.map((item, i) => {
-        const angle = (i / ORBIT_ITEMS.length) * Math.PI * 2;
-        const radius = 4.2;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-
-        return (
-          <group key={item.name} position={[x, y, 0]}>
-            <mesh>
-              <sphereGeometry args={[0.22, 16, 16]} />
-              <meshStandardMaterial
-                color={item.color}
-                emissive={item.color}
-                emissiveIntensity={0.6}
-                roughness={0.2}
-                metalness={0.8}
-              />
-            </mesh>
-            <Text
-              position={[0, 0.45, 0]}
-              fontSize={0.22}
-              color="#F5F5FA"
-              anchorX="center"
-              anchorY="middle"
-            >
-              {item.name}
-            </Text>
-          </group>
-        );
-      })}
-    </group>
-  );
-}
-
-function TripuraHills() {
-  const hillsRef = useRef<THREE.Mesh>(null);
-
-  return (
-    <group position={[0, -5, -8]}>
-      {/* Distant Hills Mesh */}
-      <mesh ref={hillsRef} rotation={[-Math.PI / 2.3, 0, 0]}>
-        <planeGeometry args={[50, 20, 32, 32]} />
-        <meshStandardMaterial
-          color="#071512"
-          roughness={0.9}
-          metalness={0.1}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-function FloatingGlyphs() {
-  return (
-    <group>
-      {CODE_GLYPHS.map((g, idx) => (
-        <Float key={idx} speed={1.5} rotationIntensity={1} floatIntensity={1.2}>
-          <Text
-            position={g.pos}
-            fontSize={0.65}
-            color="#22D3EE"
-            fillOpacity={0.6}
-            anchorX="center"
-            anchorY="middle"
-          >
-            {g.char}
-          </Text>
-        </Float>
-      ))}
-    </group>
-  );
-}
-
-function SceneContents({ mouse }: { mouse: { x: number; y: number } }) {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (!groupRef.current) return;
-    // Smooth camera / universe parallax response
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(
-      groupRef.current.rotation.y,
-      mouse.x * 0.15,
-      0.05
-    );
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      -mouse.y * 0.12,
-      0.05
-    );
-  });
-
-  return (
-    <group ref={groupRef}>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 10, 5]} intensity={1.2} color="#7C3AED" />
-      <pointLight position={[-10, -10, -5]} intensity={0.8} color="#22D3EE" />
-
-      <OrbitingRing />
-      <FloatingGlyphs />
-      <FireflyField count={90} />
-      <TripuraHills />
-    </group>
-  );
-}
-
-class CanvasErrorBoundary extends React.Component<
-  { children: React.ReactNode; fallback: React.ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
+function createTextSprite(text: string, color: string, fontSize = 28, width = 256, height = 64) {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.clearRect(0, 0, width, height);
+    ctx.font = `600 ${fontSize}px "Space Grotesk", -apple-system, sans-serif`;
+    ctx.fillStyle = color;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, width / 2, height / 2);
   }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error) {
-    console.warn("[UniverseHeroScene] WebGL Canvas error, smoothly falling back:", error.message);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return this.props.fallback;
-    }
-    return this.props.children;
-  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.9 });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(1.6, 0.4, 1);
+  return sprite;
 }
 
 export function UniverseHeroScene() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [isLowEnd, setIsLowEnd] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hasWebGL, setHasWebGL] = useState(true);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
-    // Detect reduced motion or low-power device
+    // Check reduced motion or low-power device
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.innerWidth < 768;
     if (prefersReducedMotion || (isMobile && navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)) {
       setIsLowEnd(true);
+      return;
     }
 
-    // Check WebGL availability
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    let renderer: THREE.WebGLRenderer;
     try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) setHasWebGL(false);
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance",
+      });
     } catch {
       setHasWebGL(false);
+      return;
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: (e.clientY / window.innerHeight) * 2 - 1,
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 9);
+
+    // Ambient & Accent Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0x7c3aed, 1.8);
+    dirLight.position.set(10, 10, 5);
+    scene.add(dirLight);
+
+    const pointLight = new THREE.PointLight(0x22d3ee, 1.5, 30);
+    pointLight.position.set(-8, -6, 2);
+    scene.add(pointLight);
+
+    // Root interactive group
+    const universeGroup = new THREE.Group();
+    scene.add(universeGroup);
+
+    // 1. Orbiting Ring with Tech Spheres
+    const ringGroup = new THREE.Group();
+    universeGroup.add(ringGroup);
+
+    const torusGeo = new THREE.TorusGeometry(4.2, 0.02, 16, 100);
+    const torusMat = new THREE.MeshBasicMaterial({ color: 0x7c3aed, transparent: true, opacity: 0.35 });
+    const torus = new THREE.Mesh(torusGeo, torusMat);
+    torus.rotation.x = Math.PI / 2;
+    ringGroup.add(torus);
+
+    const sphereGeo = new THREE.SphereGeometry(0.22, 24, 24);
+    ORBIT_ITEMS.forEach((item, i) => {
+      const angle = (i / ORBIT_ITEMS.length) * Math.PI * 2;
+      const radius = 4.2;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+
+      const subGroup = new THREE.Group();
+      subGroup.position.set(x, y, 0);
+
+      const color = new THREE.Color(item.color);
+      const sphereMat = new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.6,
+        roughness: 0.2,
+        metalness: 0.8,
       });
+      const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+      subGroup.add(sphere);
+
+      const labelSprite = createTextSprite(item.name, "#F5F5FA", 24, 256, 64);
+      labelSprite.position.set(0, 0.45, 0);
+      subGroup.add(labelSprite);
+
+      ringGroup.add(subGroup);
+    });
+
+    // 2. Floating Code Glyphs
+    const glyphsGroup = new THREE.Group();
+    universeGroup.add(glyphsGroup);
+
+    const glyphMeshes = CODE_GLYPHS.map((g) => {
+      const sprite = createTextSprite(g.char, g.color, 42, 256, 128);
+      sprite.position.set(g.pos[0], g.pos[1], g.pos[2]);
+      sprite.scale.set(1.8, 0.9, 1);
+      glyphsGroup.add(sprite);
+      return {
+        sprite,
+        originY: g.pos[1],
+        speed: 0.8 + Math.random() * 0.6,
+        phase: Math.random() * Math.PI * 2,
+      };
+    });
+
+    // 3. Firefly Particle Field
+    const fireflyCount = 90;
+    const fireflyPos = new Float32Array(fireflyCount * 3);
+    const fireflyPhases = new Float32Array(fireflyCount);
+
+    for (let i = 0; i < fireflyCount; i++) {
+      fireflyPos[i * 3] = (Math.random() - 0.5) * 40;
+      fireflyPos[i * 3 + 1] = Math.random() * 18 - 8;
+      fireflyPos[i * 3 + 2] = (Math.random() - 0.5) * 30 - 5;
+      fireflyPhases[i] = Math.random() * Math.PI * 2;
+    }
+
+    const fireflyGeo = new THREE.BufferGeometry();
+    fireflyGeo.setAttribute("position", new THREE.BufferAttribute(fireflyPos, 3));
+
+    const fireflyMat = new THREE.PointsMaterial({
+      color: 0x22d3ee,
+      size: 0.18,
+      transparent: true,
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const fireflyPoints = new THREE.Points(fireflyGeo, fireflyMat);
+    universeGroup.add(fireflyPoints);
+
+    // 4. Distant Tripura Hills Silhouette
+    const hillsGeo = new THREE.PlaneGeometry(50, 20, 16, 16);
+    const hillsMat = new THREE.MeshStandardMaterial({
+      color: 0x071512,
+      roughness: 0.95,
+      metalness: 0.05,
+    });
+    const hills = new THREE.Mesh(hillsGeo, hillsMat);
+    hills.position.set(0, -5, -8);
+    hills.rotation.x = -Math.PI / 2.3;
+    universeGroup.add(hills);
+
+    // Mouse Parallax
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+      targetRotationY = mouseX * 0.18;
+      targetRotationX = -mouseY * 0.14;
+    };
+
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    window.addEventListener("resize", handleResize);
+
+    // Animation Loop
+    let animId: number;
+    let clock = new THREE.Clock();
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth camera universe parallax
+      universeGroup.rotation.y += (targetRotationY - universeGroup.rotation.y) * 0.06;
+      universeGroup.rotation.x += (targetRotationX - universeGroup.rotation.x) * 0.06;
+
+      // Orbiting ring rotation
+      ringGroup.rotation.z = elapsed * 0.14;
+      ringGroup.rotation.x = Math.sin(elapsed * 0.4) * 0.18 + 0.32;
+
+      // Floating code glyphs wave
+      glyphMeshes.forEach((g) => {
+        g.sprite.position.y = g.originY + Math.sin(elapsed * g.speed + g.phase) * 0.35;
+      });
+
+      // Drifting Fireflies
+      const posArr = fireflyGeo.attributes.position.array as Float32Array;
+      for (let i = 0; i < fireflyCount; i++) {
+        const idx = i * 3;
+        posArr[idx] += Math.sin(elapsed * 0.5 + fireflyPhases[i]) * 0.012;
+        posArr[idx + 1] += Math.cos(elapsed * 0.6 + fireflyPhases[i]) * 0.01;
+        if (posArr[idx] > 20) posArr[idx] = -20;
+        if (posArr[idx] < -20) posArr[idx] = 20;
+        if (posArr[idx + 1] > 10) posArr[idx + 1] = -8;
+        if (posArr[idx + 1] < -8) posArr[idx + 1] = 10;
+      }
+      fireflyGeo.attributes.position.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+      renderer.dispose();
+      torusGeo.dispose();
+      torusMat.dispose();
+      sphereGeo.dispose();
+      fireflyGeo.dispose();
+      fireflyMat.dispose();
+      hillsGeo.dispose();
+      hillsMat.dispose();
+    };
+  }, [isLowEnd]);
 
   if (!hasWebGL || isLowEnd) {
     return <LightweightUniverseFallback />;
   }
 
   return (
-    <CanvasErrorBoundary fallback={<LightweightUniverseFallback />}>
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
-        <Canvas
-          camera={{ position: [0, 0, 9], fov: 50 }}
-          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-          dpr={[1, 1.5]}
-        >
-          <SceneContents mouse={mouse} />
-        </Canvas>
-      </div>
-    </CanvasErrorBoundary>
+    <div className="absolute inset-0 w-full h-full pointer-events-none">
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </div>
   );
 }
