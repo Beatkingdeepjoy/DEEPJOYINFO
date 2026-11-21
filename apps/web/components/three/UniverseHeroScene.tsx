@@ -151,6 +151,31 @@ function SceneContents({ mouse }: { mouse: { x: number; y: number } }) {
   );
 }
 
+class CanvasErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    console.warn("[UniverseHeroScene] WebGL Canvas error, smoothly falling back:", error.message);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
 export function UniverseHeroScene() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isLowEnd, setIsLowEnd] = useState(false);
@@ -189,14 +214,16 @@ export function UniverseHeroScene() {
   }
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 9], fov: 50 }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-        dpr={[1, 1.5]}
-      >
-        <SceneContents mouse={mouse} />
-      </Canvas>
-    </div>
+    <CanvasErrorBoundary fallback={<LightweightUniverseFallback />}>
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <Canvas
+          camera={{ position: [0, 0, 9], fov: 50 }}
+          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+          dpr={[1, 1.5]}
+        >
+          <SceneContents mouse={mouse} />
+        </Canvas>
+      </div>
+    </CanvasErrorBoundary>
   );
 }
